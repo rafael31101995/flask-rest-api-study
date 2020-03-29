@@ -14,3 +14,11 @@ CREATE TABLE IF NOT EXISTS user (
         state char(2)
 );
 "
+
+#    sudo apt update
+#    sudo apt install mysql-server
+#    sudo mysql
+#    https://www.hostinger.com/tutorials/mysql/how-create-mysql-user-and-grant-permissions-command-line
+#    CREATE USER 'users'@'localhost' IDENTIFIED BY '123';
+#    GRANT ALL PRIVILEGES ON * . * TO 'users'@'localhost';
+#    FLUSH PRIVILEGES;
