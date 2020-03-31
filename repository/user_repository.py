@@ -2,11 +2,30 @@ import pymysql
 
 
 def insert_user(json):
-    db = connect_to_mysql("localhost", "users", "123", "management")
+    db = connect_to_mysql("localhost", "rafael", "123", "management")
     cursor = db.cursor()
     cursor.execute(format_query(json))
     db.commit()
     db.close()
+
+
+def select_all_users():
+    db = connect_to_mysql("localhost", "rafael", "123", "management")
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM user")
+
+    all_users = cursor.fetchall()
+    return all_users
+
+
+def select_user(id_user):
+    db = connect_to_mysql("localhost", "rafael", "123", "management")
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM user WHERE id_user = {}".format(id_user))
+
+    user = cursor.fetchone()
+    print(user)
+    return user
 
 
 def format_query(json):
@@ -22,7 +41,9 @@ def connect_to_mysql(host, username, password, database):
 
 
 if __name__ == "__main__":
-    payload = {"id_user": 6,
+    select_user(1)
+    '''
+    payload = {"id_user": 1,
                "name": "Renata",
                "gender": "F",
                "dt_birth": "2001-05-02",
@@ -34,3 +55,4 @@ if __name__ == "__main__":
                "state": "SP"}
 
     insert_user(payload)
+    '''
