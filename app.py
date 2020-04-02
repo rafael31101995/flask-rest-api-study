@@ -18,9 +18,16 @@ def create_user():
 def get_user():
     id_user = request.args.get("id_user")
     user = user_service.select_user(id_user)
-    print(user)
     return Response(user, status=200, mimetype='application/json')
 
+
+'''
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = user_service.select_all_users()
+    print(users)
+    return Response(users, status=200, mimetype='application/json')
+'''
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)

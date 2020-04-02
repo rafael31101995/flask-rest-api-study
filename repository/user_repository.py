@@ -15,9 +15,12 @@ def select_all_users():
     db = connect_to_mysql("localhost", "rafael", "123", "management")
     cursor = db.cursor()
     cursor.execute("SELECT * FROM user")
-
     all_users = cursor.fetchall()
-    return all_users
+    list_dict = []
+    for index, user in enumerate(all_users):
+        list_dict.append(format_json(all_users[index]))
+
+    return list_dict
 
 
 def select_user(id_user):
@@ -63,26 +66,15 @@ def connect_to_mysql(host, username, password, database):
 
 
 if __name__ == "__main__":
+    data = select_all_users()
 
-    data = select_user(1)
-    '''
-    data_dict = {
-                     "id_user": data[0],
-                     "name": data[1],
-                     "gender": data[2],
-                     "dt_birth": (data[3]).strftime("%x"),
-                     "cep": data[4],
-                     "street": data[5],
-                     "complement": data[6],
-                     "neighborhood": data[7],
-                     "city": data[8],
-                     "state": data[9]
-                }
-    y = json.dumps(data_dict)
+    list_dict = []
 
-    #print(type(data_dict))
+    for index, value in enumerate(data):
+        list_dict.append(format_json(data[index]))
 
-   
+    print(list_dict)
+'''
     payload = {"id_user": 1,
                "name": "Renata",
                "gender": "F",
@@ -95,4 +87,5 @@ if __name__ == "__main__":
                "state": "SP"}
 
     insert_user(payload)
-    '''
+
+'''
