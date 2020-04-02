@@ -18,7 +18,8 @@ def create_user():
 def get_user():
     id_user = request.args.get("id_user")
     user = user_service.select_user(id_user)
-    return user
+    print(user)
+    return Response(user, status=200, mimetype='application/json')
 
 
 if __name__ == '__main__':

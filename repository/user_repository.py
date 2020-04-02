@@ -1,4 +1,6 @@
 import pymysql
+import json
+import datetime
 
 
 def insert_user(json):
@@ -24,8 +26,28 @@ def select_user(id_user):
     cursor.execute("SELECT * FROM user WHERE id_user = {}".format(id_user))
 
     user = cursor.fetchone()
-    print(user)
-    return user
+    user_str = format_json(user)
+    # print(user)
+    return user_str
+
+
+def format_json(data):
+    dt_dict = {
+        "id_user": data[0],
+        "name": data[1],
+        "gender": data[2],
+        "dt_birth": (data[3]).strftime("%x"),
+        "cep": data[4],
+        "street": data[5],
+        "complement": data[6],
+        "neighborhood": data[7],
+        "city": data[8],
+        "state": data[9]
+    }
+
+    dt_json = json.dumps(dt_dict)
+
+    return dt_json
 
 
 def format_query(json):
@@ -41,8 +63,26 @@ def connect_to_mysql(host, username, password, database):
 
 
 if __name__ == "__main__":
-    select_user(1)
+
+    data = select_user(1)
     '''
+    data_dict = {
+                     "id_user": data[0],
+                     "name": data[1],
+                     "gender": data[2],
+                     "dt_birth": (data[3]).strftime("%x"),
+                     "cep": data[4],
+                     "street": data[5],
+                     "complement": data[6],
+                     "neighborhood": data[7],
+                     "city": data[8],
+                     "state": data[9]
+                }
+    y = json.dumps(data_dict)
+
+    #print(type(data_dict))
+
+   
     payload = {"id_user": 1,
                "name": "Renata",
                "gender": "F",

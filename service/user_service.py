@@ -14,4 +14,5 @@ def select_user(id_user):
 
 
 if __name__ == "__main__":
-    select_user(1)
+    user = select_user(1)
+    print(user)
