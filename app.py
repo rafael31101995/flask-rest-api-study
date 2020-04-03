@@ -14,20 +14,18 @@ def create_user():
     return Response(json.dumps(payload), status=201, mimetype='application/json')
 
 
-@app.route('/users', methods=['GET'])
-def get_user():
-    id_user = request.args.get("id_user")
+@app.route('/users/<id_user>', methods=['GET'])
+def get_user(id_user):
     user = user_service.select_user(id_user)
     return Response(user, status=200, mimetype='application/json')
 
 
-'''
 @app.route('/users', methods=['GET'])
 def get_users():
     users = user_service.select_all_users()
     print(users)
     return Response(users, status=200, mimetype='application/json')
-'''
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)
